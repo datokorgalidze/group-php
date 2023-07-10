@@ -34,7 +34,7 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-  <?php include 'testemonial.php';?>
+  <?php  include 'function.php';?>
 
 </head>
 
@@ -82,10 +82,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
                 <ul class="navbar-nav  ">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
+                
+                  
+                  <?php  
+                        categories();
+                                                  ?>
+                   <!-- <li class="nav-item active">
+                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                  </li> -->                                
+                  <!-- <li class="nav-item">
                     <a class="nav-link" href="about.html"> About</a>
                   </li>
                   <li class="nav-item">
@@ -99,7 +104,7 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="contact.html">Contact Us</a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
               <div class="quote_btn-container">
@@ -128,7 +133,8 @@
     </header>
     <!-- end header section -->
     <!-- slider section -->
-    <section class="slider_section ">
+    <?php  generateSlider($slides, $sliderSection, $carouselControls); ?>
+    <!-- <section class="slider_section ">
       <div class="dot_design">
         <img src="images/dots.png" alt="">
       </div>
@@ -243,7 +249,7 @@
         </div>
       </div>
 
-    </section>
+    </section> -->
     <!-- end slider section -->
   </div>
 
@@ -254,28 +260,28 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <form>
+          <form action="submit2.php" method="post">
             <h4>
               BOOK <span>APPOINTMENT</span>
             </h4>
             <div class="form-row ">
               <div class="form-group col-lg-4">
                 <label for="inputPatientName">Patient Name </label>
-                <input type="text" class="form-control" id="inputPatientName" placeholder="">
+                <input type="text" class="form-control" name ="name" id="inputPatientName" placeholder="">
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputDoctorName">Doctor's Name</label>
-                <select name="" class="form-control wide" id="inputDoctorName">
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
+                <select name="doctor" class="form-control wide" id="inputDoctorName">
+                    <option value="ექიმი არ არის მონიშნული">DOCTOR</option>
+                    <option value="D.House ">D.House </option>
+                  <option value="ბიძინა კულუმბეგოვი ">ბიძინა კულუმბეგოვი  </option>
                 </select>
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputDepartmentName">Department's Name</label>
-                <select name="" class="form-control wide" id="inputDepartmentName">
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
+                <select name="department" class="form-control wide" id="inputDepartmentName">
+                    <option value="Normal distribution ">Normal distribution </option>
+                    <option value="Hospital Department"> Hospital Department</option>
                   <option value="Normal distribution ">Normal distribution </option>
                 </select>
               </div>
@@ -283,16 +289,16 @@
             <div class="form-row ">
               <div class="form-group col-lg-4">
                 <label for="inputPhone">Phone Number</label>
-                <input type="number" class="form-control" id="inputPhone" placeholder="XXXXXXXXXX">
+                <input type="number" name="pohne" class="form-control" id="inputPhone" placeholder="XXXXXXXXXX">
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputSymptoms">Symptoms</label>
-                <input type="text" class="form-control" id="inputSymptoms" placeholder="">
+                <input type="text"  name="inputSymptoms" class="form-control" id="inputSymptoms" placeholder="">
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputDate">Choose Date </label>
                 <div class="input-group date" id="inputDate" data-date-format="mm-dd-yyyy">
-                  <input type="text" class="form-control" readonly>
+                  <input type="text" name = "date" class="form-control" readonly>
                   <span class="input-group-addon date_icon">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                   </span>
@@ -357,7 +363,9 @@
         </h2>
       </div>
       <div class="row">
-        <div class="col-md-6 col-lg-3">
+        <?php HospitalTreatmentCards(); ?>
+        
+        <!-- <div class="col-md-6 col-lg-3">
           <div class="box ">
             <div class="img-box">
               <img src="images/t1.png" alt="">
@@ -428,7 +436,7 @@
               </a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -444,7 +452,10 @@
           Our <span>Doctors</span>
         </h2>
       </div>
-      <div class="carousel-wrap ">
+      <?php 
+       generateDoctorSlider();
+      ?>
+      <!-- <div class="carousel-wrap ">
         <div class="owl-carousel team_carousel">
           <div class="item">
             <div class="box">
@@ -534,7 +545,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 
@@ -550,8 +561,8 @@
         </h2>
       </div>
     </div>
-    <?php   Testimonial() ?>
-    <!-- <div class="container px-0">
+  
+    <div class="container px-0">
       <div id="customCarousel2" class="carousel  carousel-fade" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -620,7 +631,7 @@
           </a>
         </div>
       </div>
-    </div> -->
+    </div>
   </section>
   <!-- end client section -->
 
@@ -629,27 +640,27 @@
     <div class="container">
       <div class="heading_container">
         <h2>
-          Get In Touch
+          Get In Touch 
         </h2>
       </div>
       <div class="row">
         <div class="col-md-7">
           <div class="form_container">
-            <form action="">
+            <form action="submit.php" method="post">
               <div>
-                <input type="text" placeholder="Full Name" />
+                <input type="text"  name="username"  placeholder="Full Name" />
               </div>
               <div>
-                <input type="email" placeholder="Email" />
+                <input type="email"  name="email"  placeholder="Email" />
               </div>
               <div>
-                <input type="text" placeholder="Phone Number" />
+                <input type="text"  name="pone"  placeholder="Phone Number" />
               </div>
               <div>
-                <input type="text" class="message-box" placeholder="Message" />
+                <input type="text"  name="message"  class="message-box" placeholder="Message" />
               </div>
               <div class="btn_box">
-                <button>
+                <button type=">submit">
                   SEND
                 </button>
               </div>
